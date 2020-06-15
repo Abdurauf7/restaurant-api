@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../database/");
+
 router.get("/", (req, res) => {
   db("dish").then((data) => res.json(data));
 });
 
 router.post("/add", (req, res) => {
   const { name, price, date } = req.body;
+
   db("dish")
     .insert({ name: name, price: price, date: date })
     .returning("*")
